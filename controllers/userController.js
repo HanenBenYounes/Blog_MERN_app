@@ -3,7 +3,7 @@ const bcrypt = require ('bcrypt')
 //create user register user
 exports.registerController = async(req,res) =>{
     try{
-        const {username, email, password} = req.body
+        const {username, email, password} = req.body;
         //validation
         if(!username ||!email ||!password){
             return res.status(400).send({
@@ -67,4 +67,42 @@ exports.getAllUsers =async (req, res)=>{
 
 
 //login
-exports.loginController = () =>{};
+exports.loginController = async(req, res) =>{
+    try{
+        const {email, password} = req.body
+        //validation
+        if (!email || ! password){
+            return res.status (401).send({
+                sucess:false,
+                message:'Please provide email or password'
+            })
+        }
+        const user = await userModel.findOne({email})
+        if(!user){
+            return res.status(200).send({
+                success:false,
+                message:'email is not registered'
+            })
+        }
+        //password
+        const isMatch = await bcrypt.compare(password, user.password)
+        if(!isMatch){
+            return res.status(401).send({
+                sucess:false,
+                message:'Invalid username or password'
+            })
+        }
+        return res.status(200).send({
+            sucess:true,
+            message:'login successfully',
+            user
+        })
+    }catch (error) {
+        console.log (error)
+        return res.status(500).send({
+            success:false,
+            message: 'Error In Login Callback',
+            error
+        })
+    }
+};
