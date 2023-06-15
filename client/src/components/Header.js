@@ -14,16 +14,30 @@ const Header = () => {
     <AppBar position='sticky'>
         <Toolbar>
             <Typography variant='h4'>My Blog APP</Typography>
-            <Box display={'flex'} marginLeft="auto" marginRight={'auto'}>
-                <Tabs textColor='inherit' value={value} onChange={(e,val)=>setValue(val)}>
-                    <Tab label="blogs" LinkComponent={Link} to="/blogs" ></Tab>
-                    <Tab label="My Blogs" LinkComponent={Link} to="/my-blogs" ></Tab> 
+            {isLogin && (
+                     <Box display={'flex'} marginLeft="auto" marginRight={'auto'}>
+                     <Tabs textColor='inherit' value={value} onChange={(e,val)=>setValue(val)}>
+                         <Tab label="blogs" LinkComponent={Link} to="/blogs" ></Tab>
+                         <Tab label="My Blogs" LinkComponent={Link} to="/my-blogs" ></Tab> 
+     
+                     </Tabs>
+                     </Box>
 
-                </Tabs>
+            )}
+       
+                <Box display={"flex"} marginLeft="auto">
+                 {!isLogin &&(
+                    <>
+                    <Button sx={{margin:1, color:'white'}} LinkComponent={Link} to ="/login">Login</Button>
+                      <Button sx={{margin:1, color:'white'}} LinkComponent={Link} to ="/register">Register</Button>
+                    </>
+                      
+                 )}
+                 {isLogin &&( <Button sx={{margin:1, color:'white'}}>Logout</Button>)
+}
+                
                 </Box>
-                <Button sx={{margin:1, color:'white'}} LinkComponent={Link} to ="/login">Login</Button>
-                <Button sx={{margin:1, color:'white'}} LinkComponent={Link} to ="/register">Register</Button>
-                <Button sx={{margin:1, color:'white'}}>Logout</Button>
+     
            
         </Toolbar>
     </AppBar>
