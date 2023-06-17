@@ -152,7 +152,7 @@ const userModel = require('../models/userModel');
           const userBlog = await userModel.findById(req.params.id).populate("blogs")
           if (!userBlog){
             return res.status(404).send({
-                sucess:false,
+                success:false,
                 message:'blogs not found with this id'
             })
           }

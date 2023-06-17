@@ -1,12 +1,11 @@
 import React, {useState} from 'react'
 import { useNavigate } from 'react-router-dom'
-import {Box, Typography, TextField, Button}from "@mui/material"
-import e from 'cors';
+import {Box, Typography, TextField, Button}from "@mui/material";
 import  axios from "axios"
 const Register = () => {
     const navigate = useNavigate();
     //state
-    const [inputs, setInputs]=useState({
+    const [inputs, setInputs] = useState({
         name:'',
         email:'',
         password:''
