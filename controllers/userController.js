@@ -88,12 +88,12 @@ exports.loginController = async(req, res) =>{
         const isMatch = await bcrypt.compare(password, user.password)
         if(!isMatch){
             return res.status(401).send({
-                sucess:false,
+                success:false,
                 message:'Invalid username or password'
             })
         }
         return res.status(200).send({
-            sucess:true,
+            success:true,
             message:'login successfully',
             user
         })

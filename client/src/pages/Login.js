@@ -1,10 +1,13 @@
 import React, {useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 import {Box, Typography, TextField, Button}from "@mui/material";
+import {useDispatch} from "react-redux";
+import {authActions} from "../redux/store";
 import  axios from "axios"
 
 const Login = () => {
   const navigate = useNavigate();
+  const disptach = useDisptach();
     //state
     const [inputs, setInputs] = useState({
   
@@ -25,10 +28,11 @@ const Login = () => {
     const handleSubmit = async (e) =>{
       e.preventDefault();
       try{
-       const {data} = await axios.post('/api/v1/user/login', {username:inputs.name, email:inputs.email, password:inputs.password});
+       const {data} = await axios.post('/api/v1/user/login', { email:inputs.email, password:inputs.password});
         if(data.success){
+          dispatch (authActions.login());
           alert("User login Successfully");
-          navigate("/login");
+          navigate("/");
 
         }
 
