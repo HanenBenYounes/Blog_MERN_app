@@ -1,13 +1,16 @@
 import React, {useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 import {Box, Typography, TextField, Button}from "@mui/material";
-import {useDispatch} from "react-redux";
+
 import {authActions} from "../redux/store";
-import  axios from "axios"
+import  axios from "axios";
+import {useDispatch} from "react-redux";
+
 
 const Login = () => {
   const navigate = useNavigate();
-  const disptach = useDisptach();
+  const dispatch = useDispatch();
+ 
     //state
     const [inputs, setInputs] = useState({
   

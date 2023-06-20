@@ -8,7 +8,7 @@ function App() {
   return (
     <>
     <Header />
-    <Routes >
+    <Routes>
    
     <Route path="/" element = {<Blogs />} />
     <Route path="/blogs" element = {<Blogs />} />

@@ -3,7 +3,7 @@ import axios from "axios";
 import BlogCard from '../components/BlogCard';
 
 const Blogs = () => {
-  const [Blogs, setBlogs] = useState([])
+  const [blogs, setBlogs] = useState([])
   //get blogs
   const getAllBlogs = async () =>{
     try{
@@ -20,8 +20,15 @@ const Blogs = () => {
     getAllBlogs();
   },[])
   return (
-    <div>
-     <BlogCard />
+    <div>{blogs && blogs.map((blog)=> 
+    
+     <BlogCard 
+     title={blog.title} 
+    description={blog.description}
+    image={blog.image}
+    username={blog.username}
+    time={blog.createdAt}/>)}
+    
     </div>
   )
 }
