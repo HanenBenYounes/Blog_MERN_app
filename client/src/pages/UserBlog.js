@@ -1,5 +1,6 @@
 import React,{useState, useEffect} from 'react'
 import axios from 'axios'
+import BlogCard from '../components/BlogCard';
 const UserBlog = () => {
     const [blogs, setBlogs] = useState([])
      
@@ -8,8 +9,8 @@ const UserBlog = () => {
         try{
             const  id = localStorage.getItem('userId')
             const {data} = await axios.get(`/api/v1/blog/user-blog/${id}`)
-            if(dta?.success){
-                setBlogs(data?.userBlog)
+            if(data?.success){
+                setBlogs(data?.userBlog.blogs);
             }
 
         }catch (error){
@@ -20,11 +21,19 @@ const UserBlog = () => {
         getUserBlogs();
 
     },[]);
-  return (
-    <div>
-      
-    </div>
-  )
-}
+    console.log(blogs);
+    return (
+        <div>{blogs && blogs.map((blog)=> 
+        
+         <BlogCard
+         title={blog.title} 
+        description={blog.description}
+        image={blog.image}
+        username={blog.username}
+        time={blog.createdAt}/>)}
+        
+        </div>
+      );
+    }
 
 export default UserBlog
